@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    /* border: 1px solid red; */
 }
 
 body {
@@ -83,7 +84,6 @@ body {
 
 .button:hover {
     opacity: 0.5;
-    background-color: #f1a33c;
 }
 
 @media screen and (max-width: 576px) {
@@ -109,11 +109,118 @@ body {
         width: 8rem;
     }
 }
- 
- 
- 
- 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -123,27 +230,6 @@ body {
  
  
  
-
-
- 
- 
-
-
- 
- 
-
-
-
-
-
-
-
- 
- 
- 
- 
- 
- 
  
  
  
@@ -151,7 +237,7 @@ body {
  
  
 
-.
+
  
  
  
