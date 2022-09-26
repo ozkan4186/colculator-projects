@@ -1,226 +1,49 @@
+const buttons = document.querySelector(".buttons-container");
 const up = document.querySelector(".previous-display");
 const down = document.querySelector(".current-display");
-const buttons = document.querySelector(".buttons-container");
-
-let currOperand = "";
-let previousOperand = "";
-let operation = "";
-
-let equalOrPercentPressed = false;
 
 buttons.addEventListener("click", (e) => {
-    if (e.target.classList.contains("num")) {
-        appendNumber(e.target.textContent);
-        updateDisplay();
+  if (e.target.classList.contains("num")) {
+    let numb = e.target.innerText;
+    if (down.innerText == "0" && numb == "0") return;
+    if (down.innerText == "" && numb == ".") return;
+    if (down.innerText.includes(".") && numb == ".") return;
+    if (down.innerText == "0" && numb != ".") {
+      down.innerText = numb;
+      return;
     }
+    if (down.innerText.length > 10) return;
 
-    if (e.target.classList.contains("operator")) {
-        chooseOperator(e.target.textContent);
-        updateDisplay();
+    down.innerText += numb;
+  } else if (e.target.classList.contains("ac")) {
+    down.innerText = "";
+    up.innerText = "";
+  } else if (e.target.classList.contains("ae")) {
+    down.innerText *= -1;
+  } else if (e.target.classList.contains("operator")) {
+    up.innerText += down.innerText + " " + e.target.innerText;
+    down.innerText = "";
+  } else if (e.target.classList.contains("equal")) {
+    if (up.innerText.includes("+")) {
+      result = Number(up.innerText.replace("+", "")) + Number(down.innerText);
+      down.innerText = result;
+      up.innerText = "";
     }
-
-    if (e.target.classList.contains("equal")) {
-        calculate();
-        updateDisplay();
-        equalOrPercentPressed = true;
+    if (up.innerText.includes("-")) {
+      result = Number(up.innerText.replace("-", "")) - Number(down.innerText);
+      down.innerText = result;
+      up.innerText = "";
     }
-
-    if (e.target.classList.contains("ac")) {
-        previousOperand = "";
-        currOperand = "";
-        operation = "";
-        updateDisplay();
+    if (up.innerText.includes("x")) {
+      result = Number(up.innerText.replace("x", "")) * Number(down.innerText);
+      down.innerText = result;
+      up.innerText = "";
     }
-
-    if (e.target.classList.contains("ae")) {
-        if (!currOperand) return;
-        currOperand *= -1;
-        updateDisplay();
+    if (up.innerText.includes("÷")) {
+      result = Number(up.innerText.replace("÷", "")) / Number(down.innerText);
+      down.innerText = result;
+      up.innerText = "";
     }
-
-    if (e.target.classList.contains("percent")) {
-        if (!currOperand) return;
-        currOperand = currOperand / 100
-        updateDisplay();
-        equalOrPercentPressed = true;
-    }
+  }else if(e.target.classList.contains("percent"))
+  down.innerText=down.innerText/100
 });
-
-const appendNumber = (num) => {
-    if (currOperand === "0" && num === "0") return;
-
-    if (currOperand === "0" && num !== ".") {
-        currOperand = num;
-        return;
-    }
-
-    if (num === "." && currOperand.includes(".")) return;
-
-    if (currOperand.length > 10) return;
-
-    if (equalOrPercentPressed) {
-        currOperand = num;
-        equalOrPercentPressed = false;
-        return;
-    }
-    currOperand += num;
-};
-
-const updateDisplay = () => {
-    if (currOperand.toString().length > 11) {
-        currOperand = Number(currOperand).toExponential(3);
-    }
-    down.textContent = currOperand;
-
-    //! Eger bir sayiya basilmadan operator butonlarina basilirsa
-    //! up'de operatoru gosterme
-    if (operation && previousOperand) {
-        up.textContent = `${previousOperand} ${operation}`;
-    } else {
-        up.textContent = "";
-    }
-};
-
-const chooseOperator = (op) => {
-    if (previousOperand) {
-        calculate();
-    }
-
-    operation = op;
-    previousOperand = currOperand;
-    currOperand = "";
-};
-
-const calculate = () => {
-    let calculation = 0;
-
-    const prev = Number(previousOperand);
-    const current = Number(currOperand);
-
-    switch (operation) {
-        case "+":
-            calculation = prev + current;
-            break;
-        case "-":
-            calculation = prev - current;
-            break;
-        case "x":
-            calculation = prev * current;
-            break;
-        case "÷":
-            calculation = prev / current;
-            break;
-        default:
-            return;
-    }
-
-    currOperand = calculation;
-
-    previousOperand = "";
-    operation = "";
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
